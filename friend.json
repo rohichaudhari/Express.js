@@ -1,0 +1,20 @@
+[
+    {
+        "name":"Rohini",
+        "lastname":"chaudhari",
+        "age":25,
+        "email":"rohini123@gmail.com"
+    },
+    {
+        "name":"Ragini",
+        "lastname":"chaudhari",
+        "age":27,
+        "email":"ragini345@gmail.com"
+    },
+    {
+        "name":"ganga",
+        "lastname":"gamit",
+        "age":25,
+        "email":"gamitganga123@gmail.com"
+    }
+]
