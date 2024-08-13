@@ -58,11 +58,38 @@
 //     console.log('server start at http://localhost:3001');
 // })
 
+// Day-8
+// const express =  require('express');
+// const app = express();
+// const morgan = require('morgan');
+
+// const productRoutes=require('./Routers/Product.routes.js');
+// app.use(express.json());
+// app.use(express.urlencoded({extended: true}));
+// app.use(morgan('dev'));
+
+// app.get("/",(req,res)=>{
+//     res.send("welcome to Express server");
+// });
+
+// app.use("/api/product",productRoutes);
+
+// app.listen(3001,()=>{
+//     console.log("server start");
+// });
+
+// Day-9
 const express =  require('express');
 const app = express();
 const morgan = require('morgan');
+const mongoose=require("mongoose")
 
-const productRoutes=require('./Routers/Product.routes.js');
+// database connection
+mongoose
+.connect("mongodb://127.0.0.1:27017/Practice")
+.then(()=>console.log(`Database connection sucessfull.....`))
+.catch(err=>console.log(err));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
@@ -71,6 +98,7 @@ app.get("/",(req,res)=>{
     res.send("welcome to Express server");
 });
 
+const productRoutes=require('./Routers/Product.routes');
 app.use("/api/product",productRoutes);
 
 app.listen(3001,()=>{
