@@ -1,65 +1,81 @@
+// const express =  require('express');
+// const app = express();
+// const products = require('./product.json');
+// const morgan = require('morgan');
+
+// app.use(express.json());
+// app.use(express.urlencoded({extended: true}));
+// app.use(morgan('dev'));
+
+// app.get('/',(req,res)=>{
+//     res.send('welcome to express js');
+  
+// })
+// app.post('/product',(req,res)=>{
+//     products.push(req.body);
+//     res.json({product:req.body,msg:'product add successfully'});
+// });
+
+// app.get('/product',(req,res)=>{
+//     res.json(products);
+// });
+
+// app.get('/product/:id',(req,res)=>{
+//     let id =  +req.params.id;
+//     let item = products.find((product)=>product.id ===  id)
+//     res.json(item);
+// });
+
+// // replace data=> put
+// app.put("/product/:id",(req,res)=>{
+//     let id=+req.params.id;
+//     let productindex=products.findIndex((product)=>product.id===id);
+//     console.log(productindex);
+//     products.splice(productindex,1,{...req.body});
+//     res.json({message:"product replace sucessfully"})
+
+// })
+
+// // update data=>patch
+// app.patch('/product/:id',(req,res)=>{
+//     let id = +req.params.id;
+//     let productIndx = products.findIndex((product)=> product.id === id);
+//     console.log(productIndx);
+//     const product = products[proIndx];
+//     console.log(product);
+//     products.splice(proIndx,1,{...product,...req.body});
+//     res.json({message:'update succesfully'});
+// });
+// //Delete Data=>DELETE
+// app.delete('/product/:id',(req,res)=>{
+//     let id = +req.params.id;
+//     let productIndx = products.findIndex((product)=>product.id === id);
+//     console.log(proIndx);
+//     products.splice(productIndx,2);
+//     res.json({products,message:"delete successfully"});
+// });
+// app.listen(3001,(req,res)=>{
+//     console.log('server start at http://localhost:3001');
+// })
+
 const express =  require('express');
 const app = express();
-const products = require('./product.json');
 const morgan = require('morgan');
 
+const productRoutes=require('./Routers/Product.routes.js');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
-app.get('/',(req,res)=>{
-    res.send('welcome to express js');
-  
-})
-app.post('/product',(req,res)=>{
-    products.push(req.body);
-    res.json({product:req.body,msg:'product add successfully'});
+app.get("/",(req,res)=>{
+    res.send("welcome to Express server");
 });
 
-app.get('/product',(req,res)=>{
-    res.json(products);
+app.use("/api/product",productRoutes);
+
+app.listen(3001,()=>{
+    console.log("server start");
 });
-
-app.get('/product/:id',(req,res)=>{
-    let id =  +req.params.id;
-    let item = products.find((product)=>product.id ===  id)
-    res.json(item);
-});
-
-// replace data=> put
-app.put("/product/:id",(req,res)=>{
-    let id=+req.params.id;
-    let productindex=products.findIndex((product)=>product.id===id);
-    console.log(productindex);
-    products.splice(productindex,1,{...req.body});
-    res.json({message:"product replace sucessfully"})
-
-})
-
-// update data=>patch
-app.patch('/product/:id',(req,res)=>{
-    let id = +req.params.id;
-    let productIndx = products.findIndex((product)=> product.id === id);
-    console.log(productIndx);
-    const product = products[proIndx];
-    console.log(product);
-    products.splice(proIndx,1,{...product,...req.body});
-    res.json({message:'update succesfully'});
-});
-//Delete Data=>DELETE
-app.delete('/product/:id',(req,res)=>{
-    let id = +req.params.id;
-    let productIndx = products.findIndex((product)=>product.id === id);
-    console.log(proIndx);
-    products.splice(productIndx,2);
-    res.json({products,message:"delete successfully"});
-});
-app.listen(3001,(req,res)=>{
-    console.log('server start at http://localhost:3001');
-})
-
-
-
 
 
 
