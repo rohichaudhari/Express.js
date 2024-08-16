@@ -100,7 +100,7 @@ app.get("/",(req,res)=>{
 
 const productRoutes=require('./Routers/Product.routes');
 app.use("/api/product",productRoutes);
-
+app.use("/api/user",userRoutes);
 app.listen(3001,()=>{
     console.log("server start");
 });
