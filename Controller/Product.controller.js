@@ -98,7 +98,7 @@ exports.getAllProduct=async(req,res)=>
     }
 };
 
-//get user
+//get product
 exports.getProduct=async (req,res)=>{
     try{
         let Product= await product.findOne({firstname:req.query.firstname});
@@ -114,5 +114,38 @@ exports.getProduct=async (req,res)=>{
         }
         
     }
+
+    // update product
+    exports.updateProduct=async(req,res)=>{
+        try{
+            let Product=await product.findById(req.query.productId);
+            if(!Product){
+                return res.status(404).json({message:"Product not found......"});
+            }
+            Product=await product.updateOne({_id:req.query.productId},{$set:req.body},{new:true});
+            // product.save();
+            res.status(202).json({message:"product update successfully"});
+        }
+        catch(error){
+                console.log(error);
+                res.status(500).json({message:"internal server error"});
+        }
+    };
+
+    //Delete Product
+    exports.deleteProduct=async(req,res)=>{
+        try{
+            let Product=await product.findById(req.query.productId);
+            if(!Product){
+                return res.status(404).json({message:"Product not Found"});
+            }
+            Product=await product.deleteOne({_id:product._id});
+            res.status(200).json({message:"Product deleted sucessfully...."})
+        }
+        catch(error){
+            console.log(error);
+            res.status(500).json({message:"Internal server error"});
+        }
+    };
         
     
