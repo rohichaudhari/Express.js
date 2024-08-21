@@ -45,7 +45,7 @@
 //     console.log(product);
 //     products.splice(proIndx,1,{...product,...req.body});
 //     res.json({message:'update succesfully'});
-// });
+// });e
 // //Delete Data=>DELETE
 // app.delete('/product/:id',(req,res)=>{
 //     let id = +req.params.id;
@@ -79,16 +79,14 @@
 // });
 
 // Day-9
+require("dotenv").config()
 const express =  require('express');
 const app = express();
 const morgan = require('morgan');
 const mongoose=require("mongoose")
-
+const port=process.env.PORT;
 // database connection
-mongoose
-.connect("mongodb://127.0.0.1:27017/Practice")
-.then(()=>console.log(`Database connection sucessfull.....`))
-.catch(err=>console.log(err));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -101,7 +99,11 @@ app.get("/",(req,res)=>{
 const productRoutes=require('./Routers/Product.routes');
 app.use("/api/product",productRoutes);
 // app.use("/api/user",userRoutes);
-app.listen(3001,()=>{
+app.listen(port,()=>{
+    mongoose
+.connect(process.env.MONGODB_URI)
+.then(()=>console.log(`Database connection sucessfull.....`))
+.catch(err=>console.log(err));
     console.log("server start");
 });
 

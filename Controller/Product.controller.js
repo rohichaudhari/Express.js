@@ -66,7 +66,7 @@ exports.addNewProduct=async(req,res)=>
     try{
         console.log(req.body);
         const {firstname ,lastname,email,age,hobbies,address}=req.body;
-        let Product =await product.findOne({email:email});
+        let Product =await product.findOne({email:email,isDelete:false});
         if(Product)
         {
             return res.status(400).json({message:"product already exists......"});
@@ -88,7 +88,7 @@ exports.addNewProduct=async(req,res)=>
 exports.getAllProduct=async(req,res)=>
 {
     try{
-        let Products=await product.find();
+        let Products=await product.find({isDelete:false});
         res.status(200).json(Products);
     }
     catch(error)
@@ -135,7 +135,8 @@ exports.getProduct=async (req,res)=>{
     //Delete Product
     exports.deleteProduct=async(req,res)=>{
         try{
-            let Product=await product.findById(req.query.productId);
+            // let Product=await product.findById(req.query.productId);
+            let Product=await product.findOne({_id:req.query.userId,isDelete:false});
             if(!Product){
                 return res.status(404).json({message:"Product not Found"});
             }

@@ -18,6 +18,10 @@ const productSchema=mongoose.Schema({
         line1:String,
         line2:String,
         pincode:Number
+    },
+    isDelete:{
+        type:Boolean,
+        default:false
     }
 });
 module.exports=mongoose.model('products',productSchema)
