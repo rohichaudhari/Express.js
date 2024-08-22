@@ -1,19 +1,9 @@
 const express = require('express')
 const productRoutes = express.Router();
+const {registerProduct,loginUser}=require("../Controller/Product.controller.js");
 
-const {
-    addNewProduct,
-    getAllProduct,
-    getProduct,
-    updateProduct,
-    deleteProduct
-
-}=require("../Controller/Product.controller.js");
-
-
-productRoutes.post("/",addNewProduct);
-productRoutes.get("/",getAllProduct);
-productRoutes.get("/get-product",getProduct);
-productRoutes.put("/", updateProduct);
-productRoutes.delete("/", deleteProduct);
+productRoutes.post("/register",registerProduct);
+productRoutes.post("/login",loginUser);
 module.exports=productRoutes;
+
+

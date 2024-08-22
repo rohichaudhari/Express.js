@@ -6,6 +6,16 @@ const productSchema=mongoose.Schema({
         type:String
     },
     email:{
+        type:String,
+        unique:true
+    },
+    password:{
+        type:String
+    },
+    mobileNo:{
+        type:String
+    },
+    profileImage:{
         type:String
     },
     age:{
