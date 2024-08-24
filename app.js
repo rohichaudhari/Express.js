@@ -85,12 +85,14 @@ const app = express();
 const morgan = require('morgan');
 const mongoose=require("mongoose")
 const port=process.env.PORT;
+const path=require('path')
 // database connection
 
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
+app.use('/Images',express.static(path.join(__dirname,'Images'))) 
 
 app.get("/",(req,res)=>{
     res.send("welcome to Express server");

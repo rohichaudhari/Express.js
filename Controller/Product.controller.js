@@ -4,13 +4,17 @@ const jwt=require('jsonwebtoken');
 // registration
 exports.registerProduct=async(req,res)=>{
     try{
+        let imagePath="";
         let product= await Product.findOne({email:req.body.email,isDelete:false});
         if(product){
             return res.status(400).json({message:"Data already exists...."})
         }
+        if(req.file){
+            imagePath=req.file.path.replace(/\\/g,"/");
+        }
         let hashPassword=await bcrypt.hash(req.body.password,10);
         // console.log(hashPassword);
-        product=await Product.create({...req.body,password:hashPassword});
+        product=await Product.create({...req.body,password:hashPassword,profileImage:imagePath});
         product.save();
         res.status(201).json({product,message:'Registration successfulll.......'});
     }
@@ -65,19 +69,19 @@ exports.updateData=async(req,res)=>{
         }
     };
     
-    // exports.DeleteData=async(req,res)=>{
-    //     try {
-    //         let product=req.product;
-    //         product=await Product.findByIdAndUpdate(
-    //             product._id,
-    //             {$set:req.body,isDelete:true},
-    //             {new:true}
-    //         );
-    //         res.status(202).json({product,message:'updated successfully..'});
-    //     } catch (error) {
-    //         console.log(error); 
-    //         res.status(500).json({message:'internal server error'});
-    //     }
-    // };
+    exports.DeleteData=async(req,res)=>{
+        try {
+            let product=req.product;
+            product=await Product.findByIdAndUpdate(
+                product._id,
+                {$set:req.body,isDelete:true},
+                {new:true}
+            );
+            res.status(202).json({product,message:'updated successfully..'});
+        } catch (error) {
+            console.log(error); 
+            res.status(500).json({message:'internal server error'});
+        }
+    };
 
         
