@@ -84,4 +84,23 @@ exports.updateData=async(req,res)=>{
         }
     };
 
+    exports.specialProduct=async(req,res)=>{
+        try {
+            let product={
+                firstname:"sagar",
+                lastname:"gamit",
+                email:"sagar123@gmail.com",
+                password:"sagu123",
+                mobileNo:9876543210,
+                address:{
+                    line1:"surat",
+                    line2:"yogichowk"
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            res.status(500).json({message:"internal server error"});
+        }
+    };
+
         

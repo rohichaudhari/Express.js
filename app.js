@@ -86,9 +86,10 @@ const morgan = require('morgan');
 const mongoose=require("mongoose")
 const port=process.env.PORT;
 const path=require('path')
+const ejs=require('ejs');
 // database connection
 
-
+app.set("view engine","ejs")
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
