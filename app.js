@@ -87,6 +87,7 @@ const mongoose=require("mongoose")
 const port=process.env.PORT;
 const path=require('path')
 const ejs=require('ejs');
+// const passport=require("passport");
 // database connection
 
 app.set("view engine","ejs")
@@ -99,8 +100,31 @@ app.get("/",(req,res)=>{
     res.send("welcome to Express server");
 });
 
-const productRoutes=require('./Routers/Product.routes');
+
+//  const router=require('./Routers/project.routes');
+// app.use("/api/project",router);
+
+
+// const productRoutes=require('./Routers/Product.routes');
+// app.use("/api/product",productRoutes);
+
+
+
+// card routes
+const cartRoutes =  require('./Routers/card.routes');
+app.use('/api/cart',cartRoutes);
+
+
+
+// Product routes
+const productRoutes = require("./Routers/Product.routes");
 app.use("/api/product",productRoutes);
+
+//user routes
+const userRoutes = require('./Routers/user.router');
+app.use('/api/user',userRoutes);
+
+
 // app.use("/api/user",userRoutes);
 app.listen(port,()=>{
     mongoose
