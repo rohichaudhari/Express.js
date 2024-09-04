@@ -124,6 +124,9 @@ app.use("/api/product",productRoutes);
 const userRoutes = require('./Routers/user.router');
 app.use('/api/user',userRoutes);
 
+//order ROutes
+const orderRoutes=require('./Routers/order.routes');
+app.use('/api/order');
 
 // app.use("/api/user",userRoutes);
 app.listen(port,()=>{
